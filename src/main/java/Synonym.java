@@ -1,6 +1,3 @@
-/**
- * Created by Echoffee on 10/07/2016.
- */
 public class Synonym {
     private String name;
     private String[] synonyms;

@@ -1,6 +1,3 @@
-/**
- * Created by Echoffee on 10/07/2016.
- */
 import sx.blah.discord.api.*;
 import sx.blah.discord.util.*;
 

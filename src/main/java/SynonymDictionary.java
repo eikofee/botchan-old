@@ -2,9 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.LinkedList;
 
-/**
- * Created by Echoffee on 11/07/2016.
- */
 public class SynonymDictionary {
     private LinkedList<Synonym> list;
 
@@ -28,8 +25,27 @@ public class SynonymDictionary {
         }
     }
 
-    public void AddSynonym(Synonym s)
-    {
+    public void AddSynonym(Synonym s) {
         this.list.add(s);
+    }
+
+    public String GetMeaningOf(String s) {
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).Means(s))
+                return list.get(i).getName();
+        }
+        return s;
+    }
+
+    public String GetSynonymOf(String s){
+        for (int i = 0; i < list.size(); i++)
+        {
+            if (list.get(i).getName().equals(s))
+            {
+                int r = (int) Math.random();
+                return list.get(i).getSynonyms()[r % list.get(i).getSynonyms().length];
+            }
+        }
+        return s;
     }
 }

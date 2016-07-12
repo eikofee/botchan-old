@@ -1,9 +1,6 @@
 import sx.blah.discord.api.*;
 import sx.blah.discord.handle.impl.events.*;
 
-/**
- * Created by Echoffee on 10/07/2016.
- */
 public class EventsListener {
 
     @EventSubscriber
