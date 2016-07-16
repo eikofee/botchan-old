@@ -1,6 +1,6 @@
-package com.darichey.EngBot;
+package com.botchan;
 
-import sx.blah.discord.api.events.EventSubscriber;
+import sx.blah.discord.api.events.*;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
 import sx.blah.discord.util.DiscordException;

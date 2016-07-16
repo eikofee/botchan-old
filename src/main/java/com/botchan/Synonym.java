@@ -1,3 +1,5 @@
+package com.botchan;
+
 public class Synonym {
     private String name;
     private String[] synonyms;

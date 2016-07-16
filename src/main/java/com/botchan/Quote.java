@@ -1,4 +1,4 @@
-package com.darichey.EngBot;
+package com.botchan;
 
 public class Quote {
 

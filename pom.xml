@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.github.austinv11</groupId>
             <artifactId>Discord4j</artifactId>
-            <version>2.4.9</version> <!-- Current way to get 2.5 before it's officially stable -->
+            <version>2.5.0</version> <!-- Current way to get 2.5 before it's officially stable -->
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -30,6 +30,6 @@
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.targets>1.8</maven.compiler.targets>
     </properties>
 </project>
