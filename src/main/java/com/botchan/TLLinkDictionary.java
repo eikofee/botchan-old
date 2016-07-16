@@ -24,13 +24,24 @@ public class TLLinkDictionary {
 	public TLCommand GetMatchCommand(String[] p) {
 		return	GetMatchCommand(p, 0, commands);
 	}
+
 	public TLScenario GetMatchScenario(String[] p) {
 		return	GetMatchScenario(p, 0, scenarios);
 	}
 
 	private TLCommand GetMatchCommand(String[] p, int index, List<TLCommand> l){
 		if (p.length == index)
-			return l.get(0);
+			for (int i = 0; i < l.size(); i++)
+			{
+				boolean b = true;
+				for (int j = index; j < l.get(i).getPattern().length && b ; j++)
+				{
+					String s = l.get(i).getPattern()[j];
+					b = b && s.charAt(0) == '.';
+				}
+				if (b)
+					return l.get(0);
+			}
 		LinkedList<TLCommand> c = new LinkedList<>();
 		for (int i = 0; i < l.size(); i++){
 			if (p[0].equals(l.get(i).getPattern()[0])){
