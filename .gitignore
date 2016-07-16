@@ -1,4 +1,8 @@
 .idea/
 targets/
+target/
 botchan.iml
 token.txt
+.settings/
+.project
+.classpath
