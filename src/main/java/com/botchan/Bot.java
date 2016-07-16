@@ -14,6 +14,8 @@ public class Bot {
 	private static IDiscordClient client;
 	private QuoteRecord quoteRec;
 	private EventHandler eventHandler;
+
+
 	
 	public Bot() {
 		this.eventHandler = new EventHandler(this);

@@ -1,5 +1,6 @@
 package com.botchan;
 
+import com.botchan.commands.HelloWorld;
 import sx.blah.discord.api.events.*;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
@@ -12,7 +13,9 @@ public class EventHandler {
 	
 	private Bot bot;
 	private MessageBuilder messageBuilder;
-	
+
+	private TLModule module;
+
 	public EventHandler(Bot bot) {
 		this.bot = bot;
 		this.messageBuilder = new MessageBuilder(bot.getClient());
@@ -20,12 +23,14 @@ public class EventHandler {
 	
 	@EventSubscriber
 	public void onReadyEvent(ReadyEvent event) {
-	
+		module = new TLModule();
+		module.AddLink("hello botchan", new HelloWorld());
 	}
 	
 	@EventSubscriber
 	public void onMessageEvent(MessageReceivedEvent event) {
 		String messageSent = event.getMessage().getContent();
+		module.Interpret(messageSent, this, event);
 		if (messageSent.equals("Check.")) {
 			sendMessage("ok", event);
 		}
