@@ -17,7 +17,7 @@ import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 
 public class QuoteRecord {
 	
-	private final static String path = "C:/Users/Boris/Documents/DiscordEngBot/quotes.txt";
+	private final static String path = "quotes.txt";
 	private ArrayList<Quote> quotes;
 	private EventHandler eventHandler;
 	
