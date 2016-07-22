@@ -25,20 +25,18 @@ public class TLLinkDictionary {
 		return	GetMatchCommand(p, 0, commands);
 	}
 
-//	public TLScenario GetMatchScenario(String[] p) {
-//		return	GetMatchScenario(p, 0, scenarios);
-//	}
+	public TLScenario GetMatchScenario(String[] p) {
+		return	GetMatchScenario(p, 0, scenarios);
+	}
 
 	private TLCommand GetMatchCommand(String[] p, int index, List<TLCommand> l){
 		if (p.length == index)
 			for (int i = 0; i < l.size(); i++)
 			{
 				boolean b = true;
-				TLCommand command = l.get(i);
-				for (int j = index; j < command.getPattern().length && b ; j++)
+				for (int j = index; j < l.get(i).getPattern().length && b ; j++)
 				{
-					String s = command.getPattern()[command.getIndexScan()];
-					command.incrIndexScan();
+					String s = l.get(i).getPattern()[j];
 					b = b && s.charAt(0) == '.';
 				}
 				if (b)
@@ -46,19 +44,8 @@ public class TLLinkDictionary {
 			}
 		LinkedList<TLCommand> c = new LinkedList<>();
 		for (int i = 0; i < l.size(); i++){
-			TLCommand command = l.get(i);
-			if (command.getPattern()[command.getIndexScan()].charAt(0) == '.')
-			{
-				String s = command.getPattern()[command.getIndexScan()];
-				while (s.charAt(0) == '.' && ! s.equals(p[index]))
-				{
-					command.incrIndexScan();
-					s = command.getPattern()[command.getIndexScan()];
-				}
-			}
-			if (p[index].equals(command.getPattern()[command.getIndexScan()])){
-				c.add(command);
-				command.incrIndexScan();
+			if (p[0].equals(l.get(i).getPattern()[0])){
+				c.add(l.get(i));
 			}
 		}
 		if (c.size() < 1)
@@ -66,17 +53,17 @@ public class TLLinkDictionary {
 		return GetMatchCommand(p, index + 1, c);
 	}
 
-//	private TLScenario GetMatchScenario(String[] p, int index, List<TLScenario> l){
-//		if (p.length == index)
-//			return l.get(0);
-//		LinkedList<TLScenario> c = new LinkedList<>();
-//		for (int i = 0; i < l.size(); i++){
-//			if (p[0].equals(l.get(i).getPattern()[0])){
-//				c.add(l.get(i));
-//			}
-//		}
-//		if (c.size() < 1)
-//			return null;
-//		return GetMatchScenario(p, index + 1, c);
-//	}
+	private TLScenario GetMatchScenario(String[] p, int index, List<TLScenario> l){
+		if (p.length == index)
+			return l.get(0);
+		LinkedList<TLScenario> c = new LinkedList<>();
+		for (int i = 0; i < l.size(); i++){
+			if (p[0].equals(l.get(i).getPattern()[0])){
+				c.add(l.get(i));
+			}
+		}
+		if (c.size() < 1)
+			return null;
+		return GetMatchScenario(p, index + 1, c);
+	}
 }

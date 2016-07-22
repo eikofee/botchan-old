@@ -5,24 +5,10 @@ public class TLCommand {
 
 	private ICommand command;
 
-	private int indexScan;
-
-	public int getIndexScan() {
-		return indexScan % pattern.length;
-	}
-
-	public void incrIndexScan(){
-		this.indexScan++;
-	}
-
-	public void resetIndex(){
-		indexScan = 0;
-	}
 
 	public TLCommand(String pattern, ICommand command) {
 		this.setPattern(pattern.split("[ -]"));
 		this.setCommand(command);
-		this.indexScan = 0;
 	}
 
 	public String[] getPattern() {

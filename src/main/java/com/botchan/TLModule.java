@@ -26,9 +26,9 @@ public class TLModule implements ITLModule{
 		}
 		TLScenario s = null;
 		TLCommand c = linkDictionary.GetMatchCommand(p);
-//		if (c == null)
-//			s = linkDictionary.GetMatchScenario(p);
-//		else
-//			c.getCommand().Run(eh, event);
+		if (c == null)
+			s = linkDictionary.GetMatchScenario(p);
+		else
+			c.getCommand().Run(eh, event);
 	}
 }
