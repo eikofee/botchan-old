@@ -4,5 +4,5 @@ import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 
 public interface ICommand {
 
-	void Run(EventHandler eh, MessageReceivedEvent event);
+	void Run(TLModule tlm, MessageReceivedEvent event);
 }

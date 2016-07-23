@@ -5,14 +5,18 @@ import java.io.FileReader;
 import java.util.LinkedList;
 
 public class SynonymDictionary {
-    private LinkedList<Synonym> list;
+    private LinkedList<Synonym> simpleList;
+	
+	private LinkedList<Synonym> complexList;
 
     public SynonymDictionary() {
-        this.list = new LinkedList<>();
+        this.simpleList = new LinkedList<>();
+		this.complexList = new LinkedList<>();
     }
 
     public SynonymDictionary(String fileName) throws Exception {
-        this.list = new LinkedList<>();
+        this.simpleList = new LinkedList<>();
+		this.complexList = new LinkedList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             String line = br.readLine();
@@ -30,26 +34,64 @@ public class SynonymDictionary {
     }
 
     public void AddSynonym(Synonym s) {
-        this.list.add(s);
-    }
+		LinkedList<String> xs = new LinkedList<>();
+		LinkedList<String> xc = new LinkedList<>();
+		for (int i = 0; i < s.getSynonyms().length; i++)
+		{
+			if (s.getSynonyms()[i].split("[ -]").length > 1)
+				xc.add(s.getSynonyms()[i]);
+			else
+				xs.add(s.getSynonyms()[i]);
+		}
+		if (xs.size() > 0)
+			AddSimpleSynonym(new Synonym(s.getName(), xs.toArray(new String[xs.size()])));
+		if (xc.size() > 0)
+			AddComplexSynonym(new Synonym(s.getName(), xc.toArray(new String[xc.size()])));
+
+	}
+
+	public void AddSimpleSynonym(Synonym s){
+		this.simpleList.add(s);
+	}
+
+	public void AddComplexSynonym(Synonym s){
+		this.complexList.add(s);
+	}
+
+	public String FindComplexPatterns(String s){
+		for (int i = 0; i < complexList.size(); i++){
+			for (int j = 0; j < complexList.get(i).getSynonyms().length; j++){
+				s = s.replace(complexList.get(i).getSynonyms()[j], complexList.get(i).getName());
+			}
+		}
+		return s;
+	}
 
     public String GetMeaningOf(String s) {
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).Means(s))
-                return list.get(i).getName();
+        for (int i = 0; i < simpleList.size(); i++) {
+            if (simpleList.get(i).Means(s))
+                return simpleList.get(i).getName();
         }
         return s;
     }
 
     public String GetSynonymOf(String s){
-        for (int i = 0; i < list.size(); i++)
+        for (int i = 0; i < simpleList.size(); i++)
         {
-            if (list.get(i).getName().equals(s))
+            if (simpleList.get(i).getName().equals(s))
             {
-                int r = (int) Math.random();
-                return list.get(i).getSynonyms()[r % list.get(i).getSynonyms().length];
+                int r = (int) Math.floor(Math.random() *10 );
+                return simpleList.get(i).getSynonyms()[r % simpleList.get(i).getSynonyms().length];
             }
         }
         return s;
     }
+
+	public String Naturalize(String pattern) {
+		for (int i = 0; i < simpleList.size(); i++)
+		{
+			pattern = pattern.replace(simpleList.get(i).getName(), GetSynonymOf(simpleList.get(i).getName()));
+		}
+		return pattern;
+	}
 }

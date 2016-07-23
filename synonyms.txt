@@ -1,1 +1,6 @@
+_botchan_name:botchan,bot-chan,bot chan,jill
 _greeting:salut,hello,wsh
+_yes_no_question_mark:est-ce que,est ce que
+_affirmative_answer:oui
+_negative_answer:non
+_not_sure_answer:peut-être,probablement,je ne sais pas

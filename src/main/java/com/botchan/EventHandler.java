@@ -1,6 +1,7 @@
 package com.botchan;
 
 import com.botchan.commands.HelloWorld;
+import com.botchan.commands.RandomYesNoAnswer;
 import sx.blah.discord.api.events.*;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
@@ -23,8 +24,9 @@ public class EventHandler {
 	
 	@EventSubscriber
 	public void onReadyEvent(ReadyEvent event) {
-		module = new TLModule();
-		module.AddLink("_greeting botchan", new HelloWorld());
+		module = new TLModule(this);
+		module.AddLink("_greeting _botchan_name", new HelloWorld());
+		module.AddLink("_yes_no_question_mark _botchan_name ?", new RandomYesNoAnswer());
 	}
 	
 	@EventSubscriber
