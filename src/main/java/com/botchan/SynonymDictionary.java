@@ -14,15 +14,17 @@ public class SynonymDictionary {
     public SynonymDictionary(String fileName) throws Exception {
         this.list = new LinkedList<>();
         try {
-            BufferedReader br = new BufferedReader(new FileReader("synonyms.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
             String line = br.readLine();
             while (line != null) {
                 String name = line.split(":")[0];
-                String[] synonyms = line.split(":")[1].split("(?!\")([^\"])+\\b(?=\")");
-                AddSynonym(new Synonym(name, synonyms));
+                //String[] synonyms = line.split(":")[1].("(?!\")([^\"])+\\b(?=\")");
+				String[] synonyms = line.split(":")[1].split(",");
+				AddSynonym(new Synonym(name, synonyms));
                 line = br.readLine();
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw new Exception("Error while reading synonyms file");
         }
     }

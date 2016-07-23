@@ -24,7 +24,7 @@ public class EventHandler {
 	@EventSubscriber
 	public void onReadyEvent(ReadyEvent event) {
 		module = new TLModule();
-		module.AddLink("hello botchan", new HelloWorld());
+		module.AddLink("_greeting botchan", new HelloWorld());
 	}
 	
 	@EventSubscriber
@@ -33,6 +33,9 @@ public class EventHandler {
 		module.Interpret(messageSent, this, event);
 		if (messageSent.equals("Check.")) {
 			sendMessage("ok", event);
+		}
+		if (messageSent.equals("getSyn")){
+			sendMessage(module.synonymDictionary.GetSynonymOf("_greeting"),event);
 		}
 	}
 	

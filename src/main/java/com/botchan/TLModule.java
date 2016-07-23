@@ -3,12 +3,18 @@ package com.botchan;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 
 public class TLModule implements ITLModule{
-	private SynonymDictionary synonymDictionary;
+	public SynonymDictionary synonymDictionary;
 	private TLLinkDictionary linkDictionary;
 
 	public TLModule(){
-		this.synonymDictionary = new SynonymDictionary();
-		this.linkDictionary = new TLLinkDictionary();
+		try {
+			this.synonymDictionary = new SynonymDictionary("synonyms.txt");
+		}catch (Exception e) {
+			e.printStackTrace();
+			this.synonymDictionary = new SynonymDictionary();
+		}
+
+			this.linkDictionary = new TLLinkDictionary();
 	}
 
 	public void AddLink(String pattern, ICommand command) {
