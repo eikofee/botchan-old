@@ -39,7 +39,10 @@ public class TLModule implements ITLModule{
 			answer = synonymDictionary.Naturalize(pattern);
 		if (mode == SayMode.complex_nat)
 			answer = synonymDictionary.NaturalizeUsingComplexes(pattern);
-		eh.sendMessage(answer, event);
+		char c = Character.toUpperCase(answer.charAt(0));
+		StringBuilder b = new StringBuilder(answer);
+		b.setCharAt(0, c);
+		eh.sendMessage(b.toString(), event);
 	}
 
 	public enum SayMode{
