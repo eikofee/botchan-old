@@ -75,22 +75,58 @@ public class SynonymDictionary {
         return s;
     }
 
-    public String GetSynonymOf(String s){
-        for (int i = 0; i < simpleList.size(); i++)
-        {
-            if (simpleList.get(i).getName().equals(s))
-            {
-                int r = (int) Math.floor(Math.random() *10 );
-                return simpleList.get(i).getSynonyms()[r % simpleList.get(i).getSynonyms().length];
-            }
-        }
-        return s;
-    }
+	public String GetSynonymOf(String s){
+		for (int i = 0; i < simpleList.size(); i++)
+		{
+			if (simpleList.get(i).getName().equals(s))
+			{
+				int r = (int) Math.floor(Math.random() *10 );
+				return simpleList.get(i).getSynonyms()[r % simpleList.get(i).getSynonyms().length];
+			}
+		}
+		return s;
+	}
+	public String GetSynonymOfUsingComplexes(String s){
+		LinkedList<String> results = new LinkedList<>();
+		for (int i = 0; i < simpleList.size(); i++)
+		{
+			if (simpleList.get(i).getName().equals(s))
+			{
+				for (int j = 0; j < simpleList.get(i).getSynonyms().length; j++)
+				{
+					results.add(simpleList.get(i).getSynonyms()[j]);
+				}
+			}
+		}
+		for (int i = 0; i < complexList.size(); i++)
+		{
+			if (complexList.get(i).getName().equals(s))
+			{
+				for (int j = 0; j < complexList.get(i).getSynonyms().length; j++)
+				{
+					results.add(complexList.get(i).getSynonyms()[j]);
+				}
+			}
+		}
+		if (results.size() > 0)
+		{
+			int i = (int) Math.floor(Math.random()) % results.size();
+			return results.get(i);
+		}
+		return s;
+	}
 
 	public String Naturalize(String pattern) {
 		for (int i = 0; i < simpleList.size(); i++)
 		{
 			pattern = pattern.replace(simpleList.get(i).getName(), GetSynonymOf(simpleList.get(i).getName()));
+		}
+		return pattern;
+	}
+	public String NaturalizeUsingComplexes(String pattern) {
+		for (int i = 0; i < simpleList.size(); i++)
+		{
+			pattern = pattern.replace(simpleList.get(i).getName(), GetSynonymOfUsingComplexes(simpleList.get(i).getName()));
 		}
 		return pattern;
 	}

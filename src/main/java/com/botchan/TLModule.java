@@ -25,7 +25,7 @@ public class TLModule implements ITLModule{
 
 	public void Interpret(String pattern, EventHandler eh, MessageReceivedEvent event){
 		pattern = synonymDictionary.FindComplexPatterns(pattern);
-		String[] p = pattern.split("[ -]");
+		String[] p = pattern.split("[, -]");
 		for (int i = 0; i < p.length; i++){
 			p[i] = synonymDictionary.GetMeaningOf(p[i]);
 		}
@@ -33,9 +33,18 @@ public class TLModule implements ITLModule{
 		if (c != null)
 			c.getCommand().Run(this, event);
 	}
-	public void Say(String pattern, MessageReceivedEvent event){
-		String answer = synonymDictionary.Naturalize(pattern);
+	public void Say(String pattern, MessageReceivedEvent event, SayMode mode){
+		String answer = pattern;
+		if (mode == SayMode.simple_nat)
+			answer = synonymDictionary.Naturalize(pattern);
+		if (mode == SayMode.complex_nat)
+			answer = synonymDictionary.NaturalizeUsingComplexes(pattern);
 		eh.sendMessage(answer, event);
 	}
 
+	public enum SayMode{
+		no_nat,
+		simple_nat,
+		complex_nat
+	}
 }
