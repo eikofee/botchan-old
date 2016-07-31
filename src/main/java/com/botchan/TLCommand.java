@@ -7,6 +7,8 @@ public class TLCommand {
 
 	private int absoluteLength;
 
+	private int localIndex;
+
 	public TLCommand(String pattern, ICommand command) {
 		this.setPattern(pattern.split("[ -]"));
 		this.setCommand(command);
@@ -37,5 +39,14 @@ public class TLCommand {
 
 	public int getAbsoluteLength() {
 		return absoluteLength;
+	}
+
+	public int getLocalIndex() {
+		return localIndex;
+	}
+
+	public void incrIndex()
+	{
+		this.localIndex++;
 	}
 }

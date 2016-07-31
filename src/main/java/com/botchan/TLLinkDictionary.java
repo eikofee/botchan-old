@@ -33,7 +33,12 @@ public class TLLinkDictionary {
 			}
 		LinkedList<TLCommand> c = new LinkedList<>();
 		for (int i = 0; i < l.size(); i++){
-			if (l.get(i).getAbsoluteLength() == p.length && p[index].equals(l.get(i).getPattern()[index])){
+			TLCommand command = l.get(i);
+			if (command.getAbsoluteLength() == p.length && p[index].equals(command.getPattern()[command.getLocalIndex()])){
+				c.add(l.get(i));
+				command.incrIndex();
+			}
+			if (index > 0 && l.get(i).getPattern()[command.getLocalIndex() - 1].equals("*")){
 				c.add(l.get(i));
 			}
 		}

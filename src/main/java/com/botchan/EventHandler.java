@@ -27,10 +27,7 @@ public class EventHandler {
 	@EventSubscriber
 	public void onReadyEvent(ReadyEvent event) {
 		module = new TLModule(this);
-		module.AddLink("_greeting _botchan_name", new HelloWorld());
-		module.AddLink("_yes_no_question_mark _botchan_name ?", new RandomYesNoAnswer());
-		module.AddLink("fuck you _botchan_name", new CryingBotchan());
-		module.AddLink("db 2298456", new DanbooruQuery());
+		CommandsHandler.Initialize(module);
 	}
 	
 	@EventSubscriber
