@@ -1,5 +1,6 @@
 package com.botchan.commands;
 
+import com.botchan.BotchanEvent;
 import com.botchan.ICommand;
 import com.botchan.TLModule;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
@@ -11,9 +12,9 @@ import java.net.URL;
 
 public class DanbooruQuery implements ICommand {
 	@Override
-	public void Run(TLModule tlm, MessageReceivedEvent event) {
+	public void Run(BotchanEvent event) {
 		try {
-			InputStream stream = new URL("https://danbooru.donmai.us/posts/" + event.getMessage().getContent().replace("db ", "") + ".json").openStream();
+			InputStream stream = new URL("https://danbooru.donmai.us/posts/" + event.getEvent().getMessage().getContent().replace("db ", "") + ".json").openStream();
 			InputStreamReader reader = new InputStreamReader(stream);
 			BufferedReader r = new BufferedReader(reader);
 			String line;
@@ -27,7 +28,7 @@ public class DanbooruQuery implements ICommand {
 			String message = "https://danbooru.donmai.us" + o.getString("file_url");
 			r.close();
 
-			tlm.Say(message, event, TLModule.SayMode.no_nat);
+			event.getModule().Say(message, event.getEvent(), TLModule.SayMode.no_nat);
 
 		} catch (Exception e) {
 			e.getStackTrace();

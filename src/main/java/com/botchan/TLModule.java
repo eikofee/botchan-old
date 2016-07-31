@@ -30,8 +30,12 @@ public class TLModule implements ITLModule {
 			p[i] = synonymDictionary.GetMeaningOf(p[i]);
 		}
 		TLCommand c = linkDictionary.GetMatchCommand(p);
-		if (c != null)
-			c.getCommand().Run(this, event);
+		if (c != null) {
+			BotchanEvent bevent = new BotchanEvent();
+			bevent.setEvent(event);
+			bevent.setModule(this);
+			c.getCommand().Run(bevent);
+		}
 	}
 
 	public void Say(String pattern, MessageReceivedEvent event, SayMode mode) {
