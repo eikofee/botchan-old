@@ -15,6 +15,7 @@ public class Bot {
 	private static IDiscordClient client;
 	private QuoteRecord quoteRec;
 	private EventHandler eventHandler;
+	private RealisticTyping realtyping;
 
 	public Bot() {
 		this.eventHandler = new EventHandler(this);
@@ -31,6 +32,7 @@ public class Bot {
         }
 		try {
 			client = new ClientBuilder().withToken(this.token).login();
+			this.realtyping = new RealisticTyping(client);
 	        client.getDispatcher().registerListener(eventHandler);
 		} catch (DiscordException e) {
 			e.printStackTrace();
@@ -43,6 +45,10 @@ public class Bot {
 	
 	public QuoteRecord getQuoteRecord() {
 		return this.quoteRec;
+	}
+	
+	public RealisticTyping getRealisticTyping() {
+		return this.realtyping;
 	}
 	
 	/* _____________________________________________

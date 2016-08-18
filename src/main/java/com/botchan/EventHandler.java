@@ -1,10 +1,6 @@
 package com.botchan;
 
-import com.botchan.commands.CryingBotchan;
-import com.botchan.commands.DanbooruQuery;
-import com.botchan.commands.HelloWorld;
-import com.botchan.commands.RandomYesNoAnswer;
-import sx.blah.discord.api.events.*;
+import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
 import sx.blah.discord.util.DiscordException;
@@ -38,7 +34,7 @@ public class EventHandler {
 			sendMessage("ok", event);
 		}
 		if (messageSent.equals("getSyn")){
-			sendMessage(module.synonymDictionary.GetSynonymOf("_greeting"),event);
+			sendMessage(module.synonymDictionary.GetSynonymOf("_greeting"), event);
 		}
 		// Zone de test radioactive pour flemmards (TEMPORAIRE)
 		if (messageSent.equals("Botchan, affiche une citation")) {
@@ -46,12 +42,25 @@ public class EventHandler {
 		}
 		String command = "Botchan, enregistre la citation suivante : ";
 		if (messageSent.startsWith(command)) {
-			this.bot.getQuoteRecord().record("Test", messageSent.substring(command.length(), messageSent.length()));
+			this.bot.getQuoteRecord().record("Anonyme", messageSent.substring(command.length(), messageSent.length()));
 			sendMessage("C'est fait.", event);
 		}
 	}
 	
 	public void sendMessage(String message, MessageReceivedEvent event) {
+		try {
+			this.bot.getRealisticTyping().toggleTypingStatus(event.getMessage().getChannel().getID(), message);
+			messageBuilder.withChannel(event.getMessage().getChannel()).withContent(message).build();
+		} catch (RateLimitException e) {
+			e.printStackTrace();
+		} catch (DiscordException e) {
+			e.printStackTrace();
+		} catch (MissingPermissionsException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void sendInstantMessage(String message, MessageReceivedEvent event) {
 		try {
 			messageBuilder.withChannel(event.getMessage().getChannel()).withContent(message).build();
 		} catch (RateLimitException e) {
