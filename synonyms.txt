@@ -1,5 +1,5 @@
 _botchan_name:botchan,bot-chan,bot chan,jill
-_greeting:salut,hello,wsh
+_greeting:salut,hello,wsh,slt
 _yes_no_question_mark:est-ce que,est ce que
 _affirmative_answer:oui
 _negative_answer:non

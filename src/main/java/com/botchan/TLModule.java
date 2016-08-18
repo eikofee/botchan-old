@@ -24,6 +24,7 @@ public class TLModule implements ITLModule {
 	}
 
 	public void Interpret(String pattern, EventHandler eh, MessageReceivedEvent event) {
+		linkDictionary.ResetIndexes();
 		pattern = synonymDictionary.FindComplexPatterns(pattern);
 		String[] p = pattern.split("[, -]");
 		for (int i = 0; i < p.length; i++) {

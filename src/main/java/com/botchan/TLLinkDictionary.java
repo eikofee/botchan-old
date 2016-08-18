@@ -31,15 +31,17 @@ public class TLLinkDictionary {
 				if (b)
 					return l.get(0);
 			}
+		if (p[index].equals(""))
+			return GetMatchCommand(p, index++, l);
 		LinkedList<TLCommand> c = new LinkedList<>();
 		for (int i = 0; i < l.size(); i++){
 			TLCommand command = l.get(i);
-			if (command.getAbsoluteLength() == p.length && p[index].equals(command.getPattern()[command.getLocalIndex()])){
-				c.add(l.get(i));
+			if (p[index].equals(command.getPattern()[command.getLocalIndex()]) || command.getPattern()[command.getLocalIndex()].equals("*")){
+				c.add(command);
 				command.incrIndex();
 			}
-			if (index > 0 && l.get(i).getPattern()[command.getLocalIndex() - 1].equals("*")){
-				c.add(l.get(i));
+			if (index > 0 && command.getPattern()[command.getLocalIndex() - 1].equals("*")){
+				c.add(command);
 			}
 		}
 		if (c.size() < 1)
@@ -47,4 +49,10 @@ public class TLLinkDictionary {
 		return GetMatchCommand(p, index + 1, c);
 	}
 
+	public void ResetIndexes() {
+		for (int i = 0; i < this.commands.size(); i++)
+		{
+			this.commands.get(i).resetIndex();
+		}
+	}
 }

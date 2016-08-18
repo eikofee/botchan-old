@@ -14,6 +14,7 @@ public class TLCommand {
 		this.setCommand(command);
 		String[] a = pattern.split("[ -]");
 		this.absoluteLength = 0;
+		this.localIndex = 0;
 		for (int i = 0; i < a.length; i++)
 		{
 			if (a[i].charAt(0) != '.')
@@ -49,4 +50,6 @@ public class TLCommand {
 	{
 		this.localIndex++;
 	}
+
+	public void resetIndex() {this.localIndex = 0;}
 }
