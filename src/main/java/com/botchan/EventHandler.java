@@ -40,6 +40,15 @@ public class EventHandler {
 		if (messageSent.equals("getSyn")){
 			sendMessage(module.synonymDictionary.GetSynonymOf("_greeting"),event);
 		}
+		// Zone de test radioactive pour flemmards (TEMPORAIRE)
+		if (messageSent.equals("Botchan, affiche une citation")) {
+			this.bot.getQuoteRecord().randomQuote(event);
+		}
+		String command = "Botchan, enregistre la citation suivante : ";
+		if (messageSent.startsWith(command)) {
+			this.bot.getQuoteRecord().record("Test", messageSent.substring(command.length(), messageSent.length()));
+			sendMessage("C'est fait.", event);
+		}
 	}
 	
 	public void sendMessage(String message, MessageReceivedEvent event) {

@@ -8,6 +8,7 @@ import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.util.DiscordException;
 import sx.blah.discord.util.HTTP429Exception;
 
+@SuppressWarnings("deprecation")
 public class Bot {
 	
 	private String token;
@@ -15,8 +16,6 @@ public class Bot {
 	private QuoteRecord quoteRec;
 	private EventHandler eventHandler;
 
-
-	
 	public Bot() {
 		this.eventHandler = new EventHandler(this);
 		this.quoteRec = new QuoteRecord(eventHandler);
@@ -26,6 +25,7 @@ public class Bot {
 		BufferedReader br = new BufferedReader(new FileReader("token.txt"));
         try {
             this.token = br.readLine();
+            br.close();
         } catch (Exception e) {
             throw new Exception("Token File not found");
         }
@@ -38,7 +38,7 @@ public class Bot {
 	}
 	
 	public IDiscordClient getClient() {
-		return this.client;
+		return Bot.client;
 	}
 	
 	public QuoteRecord getQuoteRecord() {
@@ -49,8 +49,7 @@ public class Bot {
 					Bot settings
 	   _____________________________________________*/
 	
-	public void changeBotUsername(String name) throws DiscordException, HTTP429Exception
-	{
+	public void changeBotUsername(String name) throws DiscordException, HTTP429Exception {
 	    client.changeUsername(name);
 	}
 }

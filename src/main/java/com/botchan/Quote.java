@@ -1,7 +1,10 @@
 package com.botchan;
 
-public class Quote {
+import java.io.Serializable;
 
+public class Quote implements Serializable {
+
+	private static final long serialVersionUID = -3184609232313021599L;
 	private String author;
 	private String quote;
 	
