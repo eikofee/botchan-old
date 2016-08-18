@@ -19,7 +19,8 @@
         <dependency>
             <groupId>com.github.austinv11</groupId>
             <artifactId>Discord4j</artifactId>
-            <version>2.5.0</version> <!-- Current way to get 2.5 before it's officially stable -->
+            <version>2.5.4</version>
+    		<classifier>shaded</classifier>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
