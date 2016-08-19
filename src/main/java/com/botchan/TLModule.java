@@ -49,9 +49,9 @@ public class TLModule implements ITLModule {
 			char c = Character.toUpperCase(answer.charAt(0));
 			StringBuilder b = new StringBuilder(answer);
 			b.setCharAt(0, c);
-			eh.sendMessage(b.toString(), event);
+			eh.sendMessage(b.toString(), event, false);
 		} else {
-			eh.sendMessage(pattern, event);
+			eh.sendMessage(pattern, event, false);
 		}
 	}
 

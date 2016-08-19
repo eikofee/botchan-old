@@ -60,10 +60,10 @@ public class QuoteRecord {
 		if (quotes != null) {
 			this.unserialize();
 			int index = (int)(Math.random()*quotes.size());
-			eventHandler.sendMessage("\""+quotes.get(index).getQuote()+"\""+" - "+quotes.get(index).getAuthor(), event);
+			eventHandler.sendMessage("\""+quotes.get(index).getQuote()+"\""+" - "+quotes.get(index).getAuthor(), event, true);
 		}
 		else {
-			eventHandler.sendMessage("Il n'y pas de citations, désolé.", event);
+			eventHandler.sendMessage("Il n'y pas de citations, désolé.", event, false);
 		}
 		
 	}
