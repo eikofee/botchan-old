@@ -8,5 +8,8 @@ public enum Predicate {
 	Is,
 	
 	// Past action
-	Insulted, Spammed
+	Insulted, Spammed,
+	
+	// Procedures
+	IncreaseAffection_by, IncreaseRespect_by, IncreaseLink_by
 }

@@ -49,7 +49,7 @@ public class EventHandler {
 	
 	public void sendMessage(String message, MessageReceivedEvent event, boolean instant) {
 		try {
-			if (instant == false)
+			if (!instant)
 				this.bot.getRealisticTyping().toggleTypingStatus(event.getMessage().getChannel().getID(), message);
 			messageBuilder.withChannel(event.getMessage().getChannel()).withContent(message).build();
 		} catch (RateLimitException e) {

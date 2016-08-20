@@ -16,10 +16,14 @@ public class Bot {
 	private QuoteRecord quoteRec;
 	private EventHandler eventHandler;
 	private RealisticTyping realtyping;
+	private ReasonEngine reasonEngine;
+	private KnowledgeBase knowledgeBase;
 
 	public Bot() {
 		this.eventHandler = new EventHandler(this);
 		this.quoteRec = new QuoteRecord(eventHandler);
+		this.reasonEngine = new ReasonEngine();
+		this.knowledgeBase = new KnowledgeBase();
 	}
 	
 	public void login() throws Exception {

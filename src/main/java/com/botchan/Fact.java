@@ -5,6 +5,9 @@ package com.botchan;
  * - Evla is Male
  * - Echo love Evla
  * - Evla love Echo
+ * 
+ * Single letters are variables that match anything : A, B, C, X, Y, Z...
+ * Abstract fact aren't use for knowledges but for inferences only
  */
 
 public class Fact {

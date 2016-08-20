@@ -11,21 +11,23 @@ import java.util.ArrayList;
 public class KnowledgeBase {
 	
 	private final static String path = "knowledges.pomf";
-	private ArrayList<Fact> knowledges;
+	private ArrayList<ArrayList<Fact>> global_knowledges; // See KnowledgeType.java for indices
 	
 	public KnowledgeBase() {
-		this.knowledges = new ArrayList<>();
+		this.global_knowledges = new ArrayList<>();
+		for (@SuppressWarnings("unused") KnowledgeType t : KnowledgeType.values())
+			this.global_knowledges.add(new ArrayList<Fact>());
 	}
 	
-	public void learnFact(Fact f) {
-		this.knowledges.add(f);
+	public void learnFact(Fact f, KnowledgeType t) {
+		this.global_knowledges.get(t.ordinal()).add(f);
 	}
 
 	public void rememberFact() {
 		try {
 			FileOutputStream fout = new FileOutputStream(KnowledgeBase.path);
 			ObjectOutputStream oos = new ObjectOutputStream(fout);
-			oos.writeObject(this.knowledges);
+			oos.writeObject(this.global_knowledges);
 			oos.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -36,11 +38,11 @@ public class KnowledgeBase {
 	
 	@SuppressWarnings("unchecked")
 	public void retriveKnowledge() {
-		ArrayList<Fact> knowledges = new ArrayList<>();
+		ArrayList<ArrayList<Fact>> global_knowledges = new ArrayList<>();
 		try {
 			FileInputStream fin = new FileInputStream(KnowledgeBase.path);
 			ObjectInputStream ois = new ObjectInputStream(fin);
-			knowledges = (ArrayList<Fact>) ois.readObject();
+			global_knowledges = (ArrayList<ArrayList<Fact>>) ois.readObject();
 			ois.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -49,6 +51,6 @@ public class KnowledgeBase {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		this.knowledges = knowledges;
+		this.global_knowledges = global_knowledges;
 	}
 }
