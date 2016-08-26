@@ -1,4 +1,4 @@
-package com.botchan;
+package com.botchan.reasoning;
 
 import java.util.ArrayList;
 

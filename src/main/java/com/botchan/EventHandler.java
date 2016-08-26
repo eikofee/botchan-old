@@ -1,5 +1,7 @@
 package com.botchan;
 
+import com.botchan.reasoning.KnowledgeCategory;
+
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.impl.events.ReadyEvent;
@@ -43,6 +45,12 @@ public class EventHandler {
 		String command = "Botchan, enregistre la citation suivante : ";
 		if (messageSent.startsWith(command)) {
 			this.bot.getQuoteRecord().record("Anonyme", messageSent.substring(command.length(), messageSent.length()));
+			sendMessage("C'est fait.", event, false);
+		}
+		if (messageSent.toLowerCase().startsWith("learn")) {
+			String[] splitting = messageSent.split(" : ");
+			String[] statement = splitting[1].split(" ");
+			this.bot.getKnowledgeBase().learn(KnowledgeCategory.General, statement[0], statement[1], statement[2]);
 			sendMessage("C'est fait.", event, false);
 		}
 	}

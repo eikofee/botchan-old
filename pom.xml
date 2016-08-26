@@ -16,6 +16,12 @@
     </repositories>
 
     <dependencies>
+		<dependency>
+		   <groupId>org.apache.jena</groupId>
+		   <artifactId>apache-jena-libs</artifactId>
+		   <type>pom</type>
+		   <version>3.1.0</version>
+		</dependency>
         <dependency>
             <groupId>com.github.austinv11</groupId>
             <artifactId>Discord4j</artifactId>
@@ -33,7 +39,6 @@
             <artifactId>json</artifactId>
             <version>20160212</version>
         </dependency>
-
     </dependencies>
 
     <properties>

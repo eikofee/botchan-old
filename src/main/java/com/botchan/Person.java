@@ -1,5 +1,7 @@
 package com.botchan;
 
+import com.botchan.reasoning.GenderType;
+
 public class Person {
 
 	private String identifier; // Identifies somebody as an physical entity (usually DiscordTag)

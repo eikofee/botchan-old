@@ -1,4 +1,6 @@
-package com.botchan;
+package com.botchan.reasoning;
+
+import com.botchan.Predicate;
 
 /* Example of fact :
  * - Echo is Male

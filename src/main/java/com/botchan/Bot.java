@@ -3,6 +3,9 @@ package com.botchan;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+import com.botchan.reasoning.KnowledgeBase;
+import com.botchan.reasoning.ReasonEngine;
+
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.util.DiscordException;
@@ -10,7 +13,7 @@ import sx.blah.discord.util.HTTP429Exception;
 
 @SuppressWarnings("deprecation")
 public class Bot {
-	
+
 	private String token;
 	private static IDiscordClient client;
 	private QuoteRecord quoteRec;
@@ -53,6 +56,10 @@ public class Bot {
 	
 	public RealisticTyping getRealisticTyping() {
 		return this.realtyping;
+	}
+	
+	public KnowledgeBase getKnowledgeBase() {
+		return this.knowledgeBase;
 	}
 	
 	/* _____________________________________________
